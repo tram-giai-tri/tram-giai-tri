@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trạm Giải Trí - Góc Chill Dành Cho Học Sinh THPT</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        body {
+            background-color: #3b2314;
+            background-image: radial-gradient(#e3d2bc 15%, transparent 16%),
+                              radial-gradient(#e3d2bc 15%, transparent 16%);
+            background-size: 60px 60px;
+            background-position: 0 0, 30px 30px;
+            color: #333;
+            line-height: 1.6;
+            padding-bottom: 40px;
+        }
+        header {
+            background-color: #fff9e6;
+            color: #3b2314;
+            padding: 35px 20px;
+            text-align: center;
+            border-bottom-left-radius: 25px;
+            border-bottom-right-radius: 25px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            border-bottom: 3px solid #5c3a21;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 6px;
+            color: #3b2314;
+        }
+        header p {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #5c3a21;
+        }
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .content-box {
+            background: #fffdf5;
+            border-radius: 24px;
+            padding: 25px 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.25);
+            border: 3px solid #e3d2bc;
+            margin-top: 20px;
+        }
+        .btn-back {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: white;
+            color: #5c3a21;
+            border: 2px solid #5c3a21;
+            border-radius: 50%;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-bottom: 15px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+        }
+        .btn-back:hover {
+            background: #5c3a21;
+            color: white;
+            transform: scale(1.08);
+        }
+        .page {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+        #home-page {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .home-title {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #3b2314;
+            font-size: 1.3rem;
+        }
+        .home-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 15px;
+        }
+        .category-card {
+            background: white;
+            border-radius: 18px;
+            padding: 22px 12px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid #f3eae1;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            border-color: #5c3a21;
+        }
+        .category-card .icon {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+        }
+        .category-card h3 {
+            color: #5c3a21;
+            font-size: 1.1rem;
+            margin-bottom: 4px;
+        }
+        .category-card p {
+            color: #666;
+            font-size: 0.8rem;
+        }
+        .page-header-box {
+            background: white;
+            padding: 16px;
+            border-radius: 16px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+            margin-bottom: 16px;
+            border: 1px solid #f3eae1;
+        }
+        .page-header-box h2 {
+            color: #5c3a21;
+            font-size: 1.4rem;
+        }
+        .mood-box {
+            background: white;
+            padding: 18px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 2px solid #e3d2bc;
+        }
+        .mood-box h3 {
+            color: #3b2314;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .mood-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .mood-btn {
+            background: #fdfaf6;
+            border: 1px solid #5c3a21;
+            color: #5c3a21;
+            padding: 8px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .mood-btn:hover, .mood-btn.active {
+            background: #5c3a21;
+            color: white;
+        }
+        .recommendation-section {
+            display: none;
+            margin-top: 15px;
+            animation: fadeIn 0.4s ease;
+        }
+        .recommendation-title {
+            color: #3b2314;
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+        }
+        .vertical-grid-2col {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        @media (max-width: 500px) {
+            .vertical-grid-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+        .card-vertical {
+            background: white;
+            border-radius: 16px;
+            padding: 12px;
+            border: 2px solid #f3eae1;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            transition: all 0.2s ease;
+            width: 100%;
+        }
+        .card-vertical:hover {
+            transform: translateY(-4px);
+            border-color: #5c3a21;
+            box-shadow: 0 6px 16px rgba(92, 58, 33, 0.12);
+        }
+        .card-vertical img {
+            width: 100%;
+            max-width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 1px solid #e3d2bc;
+            margin-bottom: 10px;
+        }
+        .card-vertical-info h4 {
+            color: #3b2314;
+            font-size: 0.95rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 4px;
+        }
+        .card-vertical-info p {
+            color: #666;
+            font-size: 0.78rem;
+            margin-bottom: 8px;
+        }
+        .card-tag {
+            background: #f3eae1;
+            color: #5c3a21;
+            font-size: 0.7rem;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-weight: bold;
+            display: inline-block;
+        }
+        .group-info-box {
+            margin-top: 30px;
+            background: white;
+            border-radius: 18px;
+            padding: 18px 20px;
+            border: 2px dashed #5c3a21;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .group-info-box h3 {
+            color: #3b2314;
+            font-size: 1.1rem;
+            margin-bottom: 6px;
+        }
+        .class-name {
+            color: #5c3a21;
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+        .group-info-box ul {
+            list-style-type: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+            text-align: left;
+        }
+        .group-info-box li {
+            color: #5c3a21;
+            font-size: 0.88rem;
+            font-weight: 500;
+            background: #fdfaf6;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #f3eae1;
+        }
+        footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #fff9e6;
+            font-size: 0.85rem;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>TRẠM GIẢI TRÍ</h1>
+        <p>Góc nạp năng lượng & xả stress dành riêng cho tuổi học trò</p>
+    </header>
+    <div class="container">
+        <div class="content-box">
+            <!-- ================= TRANG CHỦ ================= -->
+            <div id="home-page" class="page">
+                <h2 class="home-title">Chọn góc giải trí bạn muốn trải nghiệm ✨</h2>
+                <div class="home-grid">
+                    <div class="category-card" onclick="navigateTo('music-page')">
+                        <div class="icon">🎧</div>
+                        <h3>Âm Nhạc</h3>
+                        <p>Playlist lofi, chill beats & nhạc sôi động</p>
+                    </div>
+                    <div class="category-card" onclick="navigateTo('movie-page')">
+                        <div class="icon">🎬</div>
+                        <h3>Phim Ảnh</h3>
+                        <p>Phim học đường, Ghibli & anime nhẹ nhàng</p>
+                    </div>
+                    <div class="category-card" onclick="navigateTo('game-page')">
+                        <div class="icon">🎮</div>
+                        <h3>Trạm Game</h3>
+                        <p>RPG, 5v5, thư giãn & game offline</p>
+                    </div>
+                    <div class="category-card" onclick="navigateTo('book-page')">
+                        <div class="icon">📚</div>
+                        <h3>Truyện & Sách</h3>
+                        <p>Manga, comic & sách kỹ năng tuổi teen</p>
+                    </div>
+                </div>
+
+                <div class="group-info-box">
+                    <h3>👥 THÔNG TIN THÀNH VIÊN - NHÓM 6</h3>
+                    <div class="class-name">Lớp: 12A8</div>
+                    <ul>
+                        <li>1. Nguyễn Thị Trúc Lam</li>
+                        <li>2. Lê Hoàng Ánh Nguyệt</li>
+                        <li>3. Trương Bội Ngọc</li>
+                        <li>4. Phạm Trần Uyển Nhi</li>
+                        <li>5. Lê Thị Thu Trang</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- ================= TRANG ÂM NHẠC ================= -->
+            <div id="music-page" class="page">
+                <button class="btn-back" onclick="navigateTo('home-page')" title="Quay lại Trang Chủ">⬅</button>
+                <div class="page-header-box">
+                    <h2>🎧 Trạm Âm Nhạc</h2>
+                    <p style="color: #666; font-size: 0.88rem;">Âm nhạc chính là liều thuốc chữa lành tuyệt vời nhất!</p>
+                </div>
+                <div class="mood-box">
+                    <h3>Bây giờ bạn đang cảm thấy thế nào? 💭</h3>
+                    <p style="font-size: 0.82rem; color: #666;">Chọn chủ đề nhạc để Trạm phát playlist phù hợp nhé:</p>
+                    <div class="mood-buttons">
+                        <button class="mood-btn" onclick="showMusicMood('happy', this)">✨ Nhạc vui / Yêu đời</button>
+                        <button class="mood-btn" onclick="showMusicMood('study', this)">📖 Nhạc học bài / V-Pop Chill</button>
+                        <button class="mood-btn" onclick="showMusicMood('sad', this)">🌧️ Nhạc buồn / Tuột mood</button>
+                    </div>
+                </div>
+                <div id="music-results" class="recommendation-section">
+                    <h4 class="recommendation-title">🎶 Gợi ý bài hát dành cho bạn</h4>
+                    <div id="music-item-list"></div>
+                </div>
+            </div>
+            <!-- ================= TRANG PHIM ẢNH ================= -->
+            <div id="movie-page" class="page">
+                <button class="btn-back" onclick="navigateTo('home-page')" title="Quay lại Trang Chủ">⬅</button>
+                <div class="page-header-box">
+                    <h2>🎬 Trạm Phim Ảnh</h2>
+                    <p style="color: #666; font-size: 0.88rem;">Thư giãn với những bộ phim hay và đặc sắc</p>
+                </div>
+                <div class="mood-box">
+                    <h3>Bạn muốn xem thể loại phim nào? 🍿</h3>
+                    <div class="mood-buttons">
+                        <button class="mood-btn" onclick="showMovieMood('history', this)">📜 Lịch sử Việt Nam</button>
+                        <button class="mood-btn" onclick="showMovieMood('romance', this)">💖 Tình cảm lãng mạn</button>
+                        <button class="mood-btn" onclick="showMovieMood('horror', this)">😱 Kinh dị</button>
+                        <button class="mood-btn" onclick="showMovieMood('action', this)">🔥 Hành động</button>
+                    </div>
+                </div>
+                <div id="movie-results" class="recommendation-section">
+                    <h4 class="recommendation-title">🍿 Danh sách phim phù hợp</h4>
+                    <div id="movie-item-list"></div>
+                </div>
+            </div>
+            <!-- ================= TRANG GAME ================= -->
+            <div id="game-page" class="page">
+                <button class="btn-back" onclick="navigateTo('home-page')" title="Quay lại Trang Chủ">⬅</button>
+                <div class="page-header-box">
+                    <h2>🎮 Trạm Game</h2>
+                    <p style="color: #666; font-size: 0.88rem;">Khám phá thế giới ảo & xả stress sau giờ học</p>
+                </div>
+                <div class="mood-box">
+                    <h3>Bạn muốn chơi thể loại game nào? 🎯</h3>
+                    <div class="mood-buttons">
+                        <button class="mood-btn" onclick="showGameMood('rpg', this)">⚔️ Game nhập vai (RPG)</button>
+                        <button class="mood-btn" onclick="showGameMood('moba', this)">🏆 Multiplayer (5v5)</button>
+                        <button class="mood-btn" onclick="showGameMood('relax', this)">🌿 Game thư giãn</button>
+                        <button class="mood-btn" onclick="showGameMood('offline', this)">📱 Game offline</button>
+                    </div>
+                </div>
+                <div id="game-results" class="recommendation-section">
+                    <h4 class="recommendation-title">🎮 Game gợi ý cho bạn</h4>
+                    <div id="game-item-list"></div>
+                </div>
+            </div>
+            <!-- ================= TRANG TRUYỆN & SÁCH ================= -->
+            <div id="book-page" class="page">
+                <button class="btn-back" onclick="navigateTo('home-page')" title="Quay lại Trang Chủ">⬅</button>
+                <div class="page-header-box">
+                    <h2>📚 Trạm Truyện & Sách</h2>
+                    <p style="color: #666; font-size: 0.88rem;">Đắm chìm vào những trang sách hay</p>
+                </div>
+                <div class="mood-box">
+                    <h3>Hôm nay bạn thích đọc gì? 📖</h3>
+                    <div class="mood-buttons">
+                        <button class="mood-btn" onclick="showBookMood('manga', this)">🖍️ Manga & Truyện tranh</button>
+                        <button class="mood-btn" onclick="showBookMood('skill', this)">💡 Sách kỹ năng & Động lực</button>
+                    </div>
+                </div>
+                <div id="book-results" class="recommendation-section">
+                    <h4 class="recommendation-title">📚 Sách/Truyện gợi ý cho bạn</h4>
+                    <div id="book-item-list"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer>
+        <p>© 2026 Trạm Giải Trí dành cho Teen. Chúc bạn có những phút giây chill thật tuyệt!</p>
+    </footer>
+    <!-- JavaScript Xử Lý Toàn Bộ Sự Kiện Click & Chuyển Trang -->
+    <script>
+        function navigateTo(pageId) {
+            let pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.style.display = 'none');
+            document.getElementById(pageId).style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        function updateActiveButton(btnElement) {
+            let parentBox = btnElement.closest('.mood-box');
+            let buttons = parentBox.querySelectorAll('.mood-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+        }
+        function showMusicMood(mood, btn) {
+            updateActiveButton(btn);
+            let section = document.getElementById('music-results');
+            let list = document.getElementById('music-item-list');
+            section.style.display = 'block';
+            if (mood === 'happy') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/63/e5/e2/63e5e2e4-829b-924d-a1dc-8058a1d69bd4/196922462702_Cover.jpg/1200x1200bf-60.jpg"><div class="card-vertical-info"><h4>Super Shy</h4><p>NewJeans</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://is1-ssl.mzstatic.com/image/thumb/Music116/v4/7f/ca/13/7fca1315-9134-7937-b159-367bbed08dfa/AKMU_LoveLee_Cover_4000x4000.jpg/1200x1200bf-60.jpg"><div class="card-vertical-info"><h4>Love Lee</h4><p>AKMU</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://i1.sndcdn.com/artworks-000642097669-ltmdh8-t500x500.jpg"><div class="card-vertical-info"><h4>Blueming</h4><p>IU</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://thumb.wikimedia.org/wikipedia/en/thumb/8/81/Ive_%E2%80%93_After_Like.png/250px-Ive_%E2%80%93_After_Like.png"><div class="card-vertical-info"><h4>After LIKE</h4><p>IVE</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/d/db/BTS_-_Butter.png"><div class="card-vertical-info"><h4>Butter</h4><p>BTS</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://bloganchoi.com/wp-content/uploads/2024/08/mong-yu-lyrics-amee-mong-mi-2.jpg"><div class="card-vertical-info"><h4>Mộng Du</h4><p>AMEE ft. MCK</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://dep.com.vn/wp-content/uploads/2020/09/mv-em-be-2.jpg"><div class="card-vertical-info"><h4>Em Bé</h4><p>AMEE</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://i1.sndcdn.com/artworks-000659802700-e5zgxh-t500x500.jpg"><div class="card-vertical-info"><h4>Anh Nhà Ở Đâu Thế</h4><p>AMEE</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://i1.sndcdn.com/artworks-000492526992-wg4b2b-t1080x1080.jpg"><div class="card-vertical-info"><h4>Ex's Hate Me</h4><p>B Ray ft. AMEE</p><span class="card-tag">Nhạc Vui</span></div></div>
+                        <div class="card-vertical"><img src="https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/b/6/d/e/b6de6c0857b19e1c921f2d379817d491.jpg"><div class="card-vertical-info"><h4>Hai Mươi Hai (22)</h4><p>Hứa Kim Tuyền x AMEE</p><span class="card-tag">Nhạc Vui</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'study') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://images.genius.com/96fab843dc59f3be9ec6e577de8552fa.1000x1000x1.png"><div class="card-vertical-info"><h4>Blue</h4><p>Yung Kai</p><span class="card-tag">Học Bài / Chill</span></div></div>
+                        <div class="card-vertical"><img src="https://i1.sndcdn.com/artworks-xz3EIz3KnM4bjotQ-4wngBQ-t500x500.jpg"><div class="card-vertical-info"><h4>Sunset Lover</h4><p>Petit Biscuit</p><span class="card-tag">Học Bài / Chill</span></div></div>
+                        <div class="card-vertical"><img src="https://i.scdn.co/image/ab67616d0000b273c9fd6014bf7236a78d27a383"><div class="card-vertical-info"><h4>Coffee Breath</h4><p>Sofia Mills</p><span class="card-tag">Học Bài / Chill</span></div></div>
+                        <div class="card-vertical"><img src="https://image-cdn.nct.vn/song/2022/01/28/7/1/a/d/1643344335857_300.jpg"><div class="card-vertical-info"><h4>Better Days</h4><p>LAKEY INSPIRED</p><span class="card-tag">Học Bài / Chill</span></div></div>
+                        <div class="card-vertical"><img src="https://data4.ikara.co/data/minio/ikara-data/images/karaoke-images/maxresdefault_08409a71.jpg"><div class="card-vertical-info"><h4>Ai Ngoài Anh</h4><p>V-Pop Chill</p><span class="card-tag">Nhạc Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://i.ytimg.com/vi/QGa6FL98h-c/maxresdefault.jpg"><div class="card-vertical-info"><h4>Không Thời Gian</h4><p>V-Pop Chill</p><span class="card-tag">Nhạc Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/e/1/9/f/e19f756b9cd48321d9eb32dbca9c253f.jpg"><div class="card-vertical-info"><h4>Một Đời</h4><p>V-Pop Chill</p><span class="card-tag">Nhạc Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/0/b/c/6/0bc6ef8c7090b9669dc299e25731e1d4.jpg"><div class="card-vertical-info"><h4>Don't Côi</h4><p>V-Pop Chill</p><span class="card-tag">Nhạc Việt</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'sad') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://i1.sndcdn.com/artworks-2SnIjINFN4mwLqRi-Iv9uyA-t500x500.jpg"><div class="card-vertical-info"><h4>Đừng Lo Anh Đợi Mà</h4><p>Mr. Siro</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://photo-resize-zmp3.zadn.vn/w600_r1x1_jpeg/cover/0/0/a/8/00a8eb97e7f7e6cd0e3e6a2e5d86cdbd.jpg"><div class="card-vertical-info"><h4>Chuyện Đôi Ta</h4><p>Emcee L, Muội</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://i1.sndcdn.com/artworks-000125052198-t40gs7-t500x500.jpg"><div class="card-vertical-info"><h4>If You</h4><p>BIGBANG</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://photo-resize-zmp3.zmdcdn.me/w256_r1x1_jpeg/cover/3/5/4/a/354a6d4e5ed4626f9a896f445ccd261b.jpg"><div class="card-vertical-info"><h4>Through the Night</h4><p>IU</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://images.genius.com/ba126e5f7f1829c51bdd14e975627bad.1000x1000x1.png"><div class="card-vertical-info"><h4>Here With Me</h4><p>d4vd</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://i.scdn.co/image/ab67616d00001e023ecc6ca902daf3617c75d336"><div class="card-vertical-info"><h4>She Never Know</h4><p>Sad Mood</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://i.scdn.co/image/ab67616d0000b2732a5cc3d081d182b04f40a1f6"><div class="card-vertical-info"><h4>Ngồi Nhìn Em Khóc</h4><p>Sad Mood</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://i.scdn.co/image/ab67616d0000b273d6186b7d1cd7e073469bd866"><div class="card-vertical-info"><h4>Người Đáng Thương Là Anh</h4><p>Sad Mood</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                        <div class="card-vertical"><img src="https://i.ytimg.com/vi/mUEK6cN6rBE/sddefault.jpg?v=68bc0aeb"><div class="card-vertical-info"><h4>1/2</h4><p>Sad Mood</p><span class="card-tag">Nhạc Buồn</span></div></div>
+                    </div>
+                `;
+            }
+        }
+        function showMovieMood(mood, btn) {
+            updateActiveButton(btn);
+            let section = document.getElementById('movie-results');
+            let list = document.getElementById('movie-item-list');
+            section.style.display = 'block';
+            if (mood === 'history') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/2/29/%C3%81p_ph%C3%ADch_%C4%90%C3%A0o%2C_ph%E1%BB%9F_v%C3%A0_piano.jpg"><div class="card-vertical-info"><h4>Đào, Phở và Piano</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLQri8jMcExvegMp10bEVpynQpYevryu7C7xI_htOhmFyace-I6u9kP59y&s=10"><div class="card-vertical-info"><h4>Mùi Cỏ Cháy</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://i.scdn.co/image/ab67616d0000b2731418ad5ff248e4c16ec62362"><div class="card-vertical-info"><h4>Áo Lụa Hà Đông</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQT_sD8J_CphBjPzXDS0B_pzmLgKq7tkStxpXyjW96lyg&s=10"><div class="card-vertical-info"><h4>Thiên Mệnh Anh Hùng</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/4/49/Mua_do_poster.jpg"><div class="card-vertical-info"><h4>Mưa Đỏ</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/1/1d/Ngh%E1%BB%89_h%C3%A8_s%E1%BB%A3_ngh%E1%BB%89_h%C6%B0u_Poster.jpg"><div class="card-vertical-info"><h4>Nghỉ Hè Sợ Nghỉ Hưu</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb7qbyxy4tNJJrNOGla-k89y4OkPhcWLeO9_-HcFTHJBUDRdhvMBvkkXo&s=10"><div class="card-vertical-info"><h4>Ván Bài Lật Ngửa</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Kinh Điển</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/f/f6/Long_Thanh_Cam_Gia_Ca.jpg"><div class="card-vertical-info"><h4>Long Thành Cầm Giả Ca</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/2/20/Kh%C3%A1t_v%E1%BB%8Dng_Th%C4%83ng_Long.jpg"><div class="card-vertical-info"><h4>Khát Vọng Thăng Long</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                        <div class="card-vertical"><img src="https://thumb.wikimedia.org/wikipedia/vi/thumb/8/89/Dungdot.jpg/250px-Dungdot.jpg"><div class="card-vertical-info"><h4>Đừng Đốt</h4><p>Lịch sử Việt Nam</p><span class="card-tag">Phim Việt</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'romance') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/d/da/Before_Sunrise_poster.jpg"><div class="card-vertical-info"><h4>Before Sunrise</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Lãng Mạn</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/8/86/Posternotebook.jpg"><div class="card-vertical-info"><h4>The Notebook</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Lãng Mạn</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPexklbEKWlhxmVhk2KEBVL1vyLEUKC0fAxREiJicmtN4FbcDqQq1QCdA&s=10"><div class="card-vertical-info"><h4>About Time</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Lãng Mạn</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/a/ab/La_La_Land_%28film%29.png"><div class="card-vertical-info"><h4>La La Land</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Nhạc Kịch</span></div></div>
+                        <div class="card-vertical"><img src="https://alisaltrojantribune.com/wp-content/uploads/2023/01/20th_Century_Girl-1-600x900.jpg"><div class="card-vertical-info"><h4>20th Century Girl</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Thanh Xuân</span></div></div>
+                        <div class="card-vertical"><img src="https://images.contentstack.io/v3/assets/blt13adb7e2033fcee5/blt8d1236fc4f930c00/69582b7a3296b81feac27d7f/EternalSunshineOfTheSpotlessMind_keyart_desktop_2000x3000.jpg"><div class="card-vertical-info"><h4>Eternal Sunshine of the Spotless Mind</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Đặc Sắc</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/en/3/38/NottingHillRobertsGrant.jpg"><div class="card-vertical-info"><h4>Notting Hill</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Kinh Điển</span></div></div>
+                        <div class="card-vertical"><img src="https://m.media-amazon.com/images/M/MV5BYWI5M2U0ZDQtMGQzMi00MDU4LWE1ZGMtZTcwN2FlNzMzOWI2XkEyXkFqcGc@._V1_.jpg"><div class="card-vertical-info"><h4>Your Name</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Anime</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7gNX1DIaIA6n1GxjAtJtWHNWDXwjfc6_oLzdQ_OTZ9xFkpeozmuNPgB_f&s=10"><div class="card-vertical-info"><h4>10 Things I Hate About You</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Học Đường</span></div></div>
+                        <div class="card-vertical"><img src="https://play-lh.googleusercontent.com/aW8UU3Zb08o-g8UAhUJAusYAwq4wKMxdvBsby1HFaDcnUviL9bzhPyZShj7tbaPdiWEJIfHvZHvIRpiKTFo"><div class="card-vertical-info"><h4>Past Lives</h4><p>Tình cảm lãng mạn</p><span class="card-tag">Nhẹ Nhàng</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'horror') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/1/1f/Conjuring_poster.jpg?utm_source=vi.wikipedia.org&utm_campaign=index&utm_content=original"><div class="card-vertical-info"><h4>The Conjuring</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Dị</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS1rCJojokAvHvkmb7OkgITEOPrY2AZuopghL4Ixn2wK8JqBszAKEBpAxil&s=10"><div class="card-vertical-info"><h4>The Medium</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Dị</span></div></div>
+                        <div class="card-vertical"><img src="https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/assets/p6107_p_v10_az.jpg"><div class="card-vertical-info"><h4>The Exorcist</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Điển</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcWor91Hjt-5sCpPSAWsIikFAX7K0YpAHT7KbYZxm9HApOTmOvEASaBgfz&s=10"><div class="card-vertical-info"><h4>The Wailing</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Dị</span></div></div>
+                        <div class="card-vertical"><img src="https://play-lh.googleusercontent.com/BiL7SHL5Iq0J_0lMmWf8f3ONwYgoa9pq6DqOFh_T6VWsSB8914-sqTFMJId3aJL3Mm1E6EWvFgtFj9SpNQ"><div class="card-vertical-info"><h4>The Sixth Sense</h4><p>Phim kinh dị</p><span class="card-tag">Giật Gân</span></div></div>
+                        <div class="card-vertical"><img src="https://m.media-amazon.com/images/M/MV5BMDdjZTljZWMtMDIwNi00MTA5LTkxZmItNmY0NDA3ZDM0N2M2XkEyXkFqcGc@._V1_.jpg"><div class="card-vertical-info"><h4>A Quiet Place</h4><p>Phim kinh dị</p><span class="card-tag">Sinh Tồn</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT00Lru3OTWbq_khrWTOD7lmldBgv114WS5v7psBAIIojoVjG9vyo73zCY&s=10"><div class="card-vertical-info"><h4>The Shining</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Điển</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQTWpk6aFHBKobkIABGhNMpXHFbehFHYNkswO5u1v2usrS1bVX4Hkqd4Arc&s=10"><div class="card-vertical-info"><h4>It Follows</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Dị</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpBszlsXM4js7f3JEoDQRSbQx_11oby6olNldqBnsU6w&s"><div class="card-vertical-info"><h4>Train to Busan</h4><p>Phim kinh dị</p><span class="card-tag">Zombie</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdISavUCBhuf9IU8RwVb1cJ_ddVXEh76LI3KS29QWyyA&s=10"><div class="card-vertical-info"><h4>Talk to Me</h4><p>Phim kinh dị</p><span class="card-tag">Kinh Dị</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'action') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQOuNFh2wBNx0WyFWL05nOHzOjbYEukVB350ZMnw8sPLNMBw-gCi7BWh68&s=10"><div class="card-vertical-info"><h4>John Wick</h4><p>Phim hành động</p><span class="card-tag">Hành Động</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQssmXdZpTPu7H-zpYFiKJ7F8UCPi3_fTY-geywIf6eLtAvvqUd32MhiC8&s=10"><div class="card-vertical-info"><h4>Mission: Impossible – Fallout</h4><p>Phim hành động</p><span class="card-tag">Bom Tấn</span></div></div>
+                        <div class="card-vertical"><img src="https://cdn.marvel.com/content/2x/avengersinfinitywar_lob_mas_hlf_01_3.webp"><div class="card-vertical-info"><h4>Avengers: Infinity War</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQoyLTOME_mXeOJH-C3KWKzCIBEsa7Kdv7Dgfngwm8r-Ez9cz0Dy_dw7_Vp&s=10"><div class="card-vertical-info"><h4>Top Gun: Maverick</h4><p>Phim hành động</p><span class="card-tag">Không Chiến</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/7/71/%C3%81p_ph%C3%ADch_phim_Ng%C6%B0%E1%BB%9Di_Nh%E1%BB%87n_kh%C3%B4ng_c%C3%B2n_nh%C3%A0.jpg"><div class="card-vertical-info"><h4>Spider-Man: No Way Home</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                        <div class="card-vertical"><img src="https://i.ebayimg.com/images/g/1aEAAOSwZV1jPEJo/s-l1200.jpg"><div class="card-vertical-info"><h4>Captain America: The Winter Soldier</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                        <div class="card-vertical"><img src="https://m.media-amazon.com/images/M/MV5BNWE5MGI3MDctMmU5Ni00YzI2LWEzMTQtZGIyZDA5MzQzNDBhXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg"><div class="card-vertical-info"><h4>Guardians of the Galaxy</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUTldWZV2efKTZlkiLglER7ZYaAvZRPLWKNIb4DjaLJZoLXVIdq_qNOO0Z&s=10"><div class="card-vertical-info"><h4>Ant-Man</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIfRlpoxP82W8V_G-izAAGMAqZeDapIAhcoJXGnYlSDns-ZKZT6LEpIeY&s=10"><div class="card-vertical-info"><h4>Black Panther</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                        <div class="card-vertical"><img src="https://thumb.wikimedia.org/wikipedia/vi/thumb/4/4f/Doctor_Strange_Vol_4_2_Ross_Variant_Textless.jpg/250px-Doctor_Strange_Vol_4_2_Ross_Variant_Textless.jpg"><div class="card-vertical-info"><h4>Doctor Strange</h4><p>Phim hành động</p><span class="card-tag">Marvel</span></div></div>
+                    </div>
+                `;
+            }
+        }
+        function showGameMood(mood, btn) {
+            updateActiveButton(btn);
+            let section = document.getElementById('game-results');
+            let list = document.getElementById('game-item-list');
+            section.style.display = 'block';
+            if (mood === 'rpg') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://www.notebookcheck.net/fileadmin/Notebooks/News/_nc5/Genshin-Impact-Version-7.018.jpg"><div class="card-vertical-info"><h4>Genshin Impact</h4><p>Thế giới mở Teyvat</p><span class="card-tag">RPG</span></div></div>
+                        <div class="card-vertical"><img src="https://cdn-bgp.bluestacks.com/BGP/vn/gametiles_com.kurogame.wutheringwaves.global.jpg"><div class="card-vertical-info"><h4>Wuthering Waves</h4><p>Hành động thế giới mở</p><span class="card-tag">RPG</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/6/69/Sky_video_game.jpg"><div class="card-vertical-info"><h4>Sky: Children of the Light</h4><p>Phiêu lưu & chữa lành</p><span class="card-tag">RPG</span></div></div>
+                        <div class="card-vertical"><img src="https://m.media-amazon.com/images/M/MV5BZGQxMjYyOTUtNjYyMC00NzdmLWI4YmYtMDhiODU3Njc5ZDJkXkEyXkFqcGc@._V1_QL75_UX190_CR0,2,190,281_.jpg"><div class="card-vertical-info"><h4>Elden Ring</h4><p>Nhập vai hành động</p><span class="card-tag">RPG</span></div></div>
+                        <div class="card-vertical"><img src="https://image.api.playstation.com/vulcan/ap/rnd/202308/1103/8c3ce3611a4bb187418bb5e24924a055ba33d3046a7aaacb.png"><div class="card-vertical-info"><h4>Honkai: Star Rail</h4><p>Phiêu lưu vũ trụ theo lượt</p><span class="card-tag">RPG</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'moba') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://i.pinimg.com/736x/b7/cf/62/b7cf62846ae6ae5e96b35cf9d5e05a7c.jpg"><div class="card-vertical-info"><h4>Valorant</h4><p>Bắn súng chiến thuật 5v5</p><span class="card-tag">5v5</span></div></div>
+                        <div class="card-vertical"><img src="https://thietkethuonghieu.asia/wp-content/uploads/2021/07/EMO_LOL_02.jpg"><div class="card-vertical-info"><h4>League of Legends</h4><p>Liên Minh Huyền Thoại</p><span class="card-tag">5v5</span></div></div>
+                        <div class="card-vertical"><img src="https://cdna.artstation.com/p/assets/covers/images/101/213/400/large/nhan-the-hieu-natehiu-art-nhan-the-hieu-natehiu-art-airi-thumbnails-as.webp"><div class="card-vertical-info"><h4>Arena of Valor</h4><p>Liên Quân Mobile</p><span class="card-tag">5v5</span></div></div>
+                        <div class="card-vertical"><img src="https://frankgamer.com/wp-content/uploads/2020/01/cover.png"><div class="card-vertical-info"><h4>Onmyoji Arena</h4><p>Âm Dương Sư MOBA</p><span class="card-tag">5v5</span></div></div>
+                        <div class="card-vertical"><img src="https://assets-prd.ignimgs.com/2023/01/18/honorofkings-1674062354288.jpg"><div class="card-vertical-info"><h4>Honor of Kings</h4><p>Vương Giả Vinh Diệu</p><span class="card-tag">5v5</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'relax') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/vi/1/1f/Animal_Crossing_New_Horizons.jpg"><div class="card-vertical-info"><h4>Animal Crossing</h4><p>Xây dựng hòn đảo bình yên</p><span class="card-tag">Thư Giãn</span></div></div>
+                        <div class="card-vertical"><img src="https://thumb.wikimedia.org/wikipedia/en/thumb/d/d7/Tomodachi_Life_-_Living_The_Dream.jpeg/250px-Tomodachi_Life_-_Living_The_Dream.jpeg"><div class="card-vertical-info"><h4>Tomodachi Life</h4><p>Mô phỏng cuộc sống vui nhộn</p><span class="card-tag">Thư Giãn</span></div></div>
+                        <div class="card-vertical"><img src="https://upload.wikimedia.org/wikipedia/en/7/7f/Sims4_Rebrand.png"><div class="card-vertical-info"><h4>The Sims 4</h4><p>Sáng tạo thế giới của riêng bạn</p><span class="card-tag">Thư Giãn</span></div></div>
+                        <div class="card-vertical"><img src="https://assets.nintendo.com/image/upload/q_auto/f_auto/store/software/switch2/70010000128076/6f049023ace03909d42fbba9684616c5f1ed56aea1d8dcdeb1e46fcc1e88ec3d"><div class="card-vertical-info"><h4>Go-Go Town!</h4><p>Quản lý & phát triển thị trấn</p><span class="card-tag">Thư Giãn</span></div></div>
+                        <div class="card-vertical"><img src="https://static.wixstatic.com/media/9965a8_da553365fd174ed89f441ecc6299fc09~mv2.jpg"><div class="card-vertical-info"><h4>Coral Island</h4><p>Nông trại & khám phá đại dương</p><span class="card-tag">Thư Giãn</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'offline') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQng3rxWsSj9xgMu9VgzD516SR6mImtrMaP99gY0eJSNubvORBE6zceCpQ&s=10"><div class="card-vertical-info"><h4>Fruit Ninja</h4><p>Chém hoa quả xả stress</p><span class="card-tag">Offline</span></div></div>
+                        <div class="card-vertical"><img src="https://blockblast-free.io/upload/image/game/block-blast-free.png"><div class="card-vertical-info"><h4>Block Blast!</h4><p>Xếp khối giải đố gây nghiện</p><span class="card-tag">Offline</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHEFcla5LofQqHHl5XYKTzHLx8JkRGaIxkB-wslMpKYQ&s=10"><div class="card-vertical-info"><h4>Talking Tom Gold Run</h4><p>Chạy vô tận thu thập vàng</p><span class="card-tag">Offline</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZvPvRhoRvuLXEmFhnXpSK5sfByx83kEN4izUwfiEjLIlviSik_qip3L3n&s=10"><div class="card-vertical-info"><h4>Subway Surfers</h4><p>Lướt ván trên đường ray</p><span class="card-tag">Offline</span></div></div>
+                        <div class="card-vertical"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAiUzewslkZEuBVE0FpnyUPqstoqW3uZv65eLTA_qYDA&s=10"><div class="card-vertical-info"><h4>Temple Run 2</h4><p>Chạy trốn khỏi quái vật đền cổ</p><span class="card-tag">Offline</span></div></div>
+                    </div>
+                `;
+            }
+        }
+        function showBookMood(mood, btn) {
+            updateActiveButton(btn);
+            let section = document.getElementById('book-results');
+            let list = document.getElementById('book-item-list');
+            section.style.display = 'block';
+            if (mood === 'manga') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://tse1.mm.bing.net/th/id/OIP.VEyToBlAR-1uusF1O0VeuQHaLE?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Naruto</h4><p>Masashi Kishimoto</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://gbaike-image.cdn.bcebos.com/f636afc379310a55b319282fa91854a98226cefcbae1/f636afc379310a55b319282fa91854a98226cefcbae1_3_4?x-bce-process=image/format,f_auto"><div class="card-vertical-info"><h4>One Piece</h4><p>Eiichiro Oda</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://tse2.mm.bing.net/th/id/OIP.ngiaNUOU-BXIN-OE2r4HZQHaLv?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Doraemon</h4><p>Fujiko F. Fujio</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://tse3.mm.bing.net/th/id/OIP.tWyBhrw1FmBAleOiEsOiGQHaLR?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>My Hero Academia</h4><p>Kohei Horikoshi</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://tse2.mm.bing.net/th/id/OIP.3L7zYYPt5zXKXTKW4FO0AAHaHa?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Ma Đạo Tổ Sư</h4><p>Mặc Hương Đồng Khứu</p><span class="card-tag">Manhua</span></div></div>
+                        <div class="card-vertical"><img src="https://tse4.mm.bing.net/th/id/OIP.zi3DEzGdtpPiC9FE4hWLMgHaKl?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Blue Lock</h4><p>Muneyuki Kaneshiro</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://tse3.mm.bing.net/th/id/OIP.vov6J1jYN6DRD160VxMhcwHaLH?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Wind Breaker</h4><p>Satoru Nii</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://www.manga-news.com/public/images/dvd/true-beauty-anime.webp"><div class="card-vertical-info"><h4>True Beauty</h4><p>Yaongyi</p><span class="card-tag">Webtoon</span></div></div>
+                        <div class="card-vertical"><img src="https://urdumangas.pk/wp-content/uploads/2025/10/bleach-vol-19-9781421510439_hr-1.jpg"><div class="card-vertical-info"><h4>Bleach</h4><p>Tite Kubo</p><span class="card-tag">Manga</span></div></div>
+                        <div class="card-vertical"><img src="https://tse1.mm.bing.net/th/id/OIP.XbLjCyru8YK8uZwuIc2R4gHaLH?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Black Clover</h4><p>Yuki Tabata</p><span class="card-tag">Manga</span></div></div>
+                    </div>
+                `;
+            } else if (mood === 'skill') {
+                list.innerHTML = `
+                    <div class="vertical-grid-2col">
+                        <div class="card-vertical"><img src="https://tse4.mm.bing.net/th/id/OIP.G76SqIikJucWUYlXndPuyQHaKr?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Mỗi Lần Vấp Ngã Là Một Lần Trưởng Thành</h4><p>Kỹ năng sống</p><span class="card-tag">Động Lực</span></div></div>
+                        <div class="card-vertical"><img src="https://tse2.mm.bing.net/th/id/OIP.4mhvgwdfAGEhwvnLQ_3vjwHaKp?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Trở Thành Phiên Bản Tốt Hơn Của Chính Mình</h4><p>Phát triển bản thân</p><span class="card-tag">Kỹ Năng</span></div></div>
+                        <div class="card-vertical"><img src="https://salt.tikicdn.com/cache/w1200/ts/product/22/cb/a9/524a27dcd45e8a13ae6eecb3dfacba7c.jpg"><div class="card-vertical-info"><h4>Rèn Luyện Tư Duy Phản Biện</h4><p>Kỹ năng tư duy</p><span class="card-tag">Học Tập</span></div></div>
+                        <div class="card-vertical"><img src="https://bizweb.dktcdn.net/thumb/1024x1024/100/197/269/products/nghe-thuat-chon-ban-ma-choi-01.jpg?v=1724729427177"><div class="card-vertical-info"><h4>Nghệ Thuật "Chọn Bạn Mà Chơi"</h4><p>Kỹ năng xã hội</p><span class="card-tag">Kỹ Năng Sống</span></div></div>
+                        <div class="card-vertical"><img src="https://tse1.mm.bing.net/th/id/OIP.BLR_vCdcsvOP8i_DkYy-3AHaKY?r=0&pid=Api&h=220&P=0"><div class="card-vertical-info"><h4>Tuổi Trẻ Đáng Giá Bao Nhiêu?</h4><p>Rosie Nguyễn</p><span class="card-tag">Truyền Cảm Hứng</span></div></div>
+                        <div class="card-vertical"><img src="https://cdn1.fahasa.com/media/flashmagazine/images/page_images/dam_that_bai/2024_06_10_11_08_25_1-390x510.jpg"><div class="card-vertical-info"><h4>Dám Thất Bại</h4><p>Động lực sống</p><span class="card-tag">Động Lực</span></div></div>
+                        <div class="card-vertical"><img src="https://cdn1.fahasa.com/media/catalog/product/k/y/kyluattugiac-bia1.png"><div class="card-vertical-info"><h4>Kỷ Luật Tự Giác</h4><p>Phát triển bản thân</p><span class="card-tag">Kỹ Năng</span></div></div>
+                        <div class="card-vertical"><img src="https://cdn0.fahasa.com/media/catalog/product/c/_/c_ng-b_ng-tr_n-_i-do-b_n-n_-l_c-gi_nh-l_y-_1__1.jpg"><div class="card-vertical-info"><h4>Công Bằng Trên Đời Là Do Bạn Nỗ Lực Giành Lấy</h4><p>Động lực</p><span class="card-tag">Truyền Cảm Hứng</span></div></div>
+                        <div class="card-vertical"><img src="https://sachweb.com/Upload/sach/nhungkynangcoban.jpg"><div class="card-vertical-info"><h4>Những Kỹ Năng Cơ Bản Trong Cuộc Sống Hằng Ngày</h4><p>Kỹ năng sống</p><span class="card-tag">Thực Tế</span></div></div>
+                        <div class="card-vertical"><img src="https://tse2.mm.bing.net/th/id/OIP.dOD9i8NNJJV1k4FRQ-BFgQHaKX?r=0&pid=Api&h=220&P=0"><h4>Đừng Bao Giờ Từ Bỏ Ước Mơ</h4><p>Sách động lực</p><span class="card-tag">Động Lực</span></div></div>
+                    </div>
+                `;
+            }
+        }
+    </script>
+</body>
+</html>

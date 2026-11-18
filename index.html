@@ -183,7 +183,6 @@
             font-size: 1.1rem;
             margin-bottom: 12px;
         }
-        /* ĐÃ SỬA CỐ ĐỊNH 2 CỘT, KHÔNG BỊ PHÌNH TO KHI LẺ CARD */
         .vertical-grid-2col {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -242,6 +241,37 @@
             font-weight: bold;
             display: inline-block;
         }
+        /* CSS cho phần thông tin Nhóm và Thành viên */
+        .group-info-box {
+            margin-top: 30px;
+            background: white;
+            border-radius: 18px;
+            padding: 18px 20px;
+            border: 2px dashed #5c3a21;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        }
+        .group-info-box h3 {
+            color: #3b2314;
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .group-info-box ul {
+            list-style-type: none;
+            padding-left: 0;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 8px;
+        }
+        .group-info-box li {
+            color: #5c3a21;
+            font-size: 0.88rem;
+            font-weight: 500;
+            background: #fdfaf6;
+            padding: 6px 10px;
+            border-radius: 8px;
+            border: 1px solid #f3eae1;
+        }
         footer {
             text-align: center;
             margin-top: 35px;
@@ -283,7 +313,20 @@
                         <p>Manga, comic & sách kỹ năng tuổi teen</p>
                     </div>
                 </div>
+
+                <!-- Thêm thông tin Nhóm 6 và Thành viên vào cuối Trang chủ -->
+                <div class="group-info-box">
+                    <h3>👥 THÔNG TIN THÀNH VIÊN - NHÓM 6</h3>
+                    <ul>
+                        <li>1. Nguyễn Thị Trúc Lam</li>
+                        <li>2. Lê Hoàng Ánh Nguyệt</li>
+                        <li>3. Trương Bội Ngọc</li>
+                        <li>4. Phạm Trần Uyển Nhi</li>
+                        <li>5. Lê Thị Thu Trang</li>
+                    </ul>
+                </div>
             </div>
+
             <!-- ================= TRANG ÂM NHẠC ================= -->
             <div id="music-page" class="page">
                 <button class="btn-back" onclick="navigateTo('home-page')" title="Quay lại Trang Chủ">⬅</button>
